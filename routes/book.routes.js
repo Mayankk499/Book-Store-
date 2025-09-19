@@ -1,10 +1,10 @@
-import express from 'express';
-import books from '../db/book.db';
+import express from "express";
+import books from "../db/book.db.js";
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json(books);
+router.get("/", (req, res) => {
+  res.json(books);
 });
 
 router.get("/:id", (req, res) => {
@@ -49,7 +49,9 @@ router.delete("/:id", (req, res) => {
   const indexToDelete = books.findIndex((e) => e.id === id);
 
   if (indexToDelete < 0) {
-    return res.status(404).json({ error: `Book with id ${id} does not exist 🚫` });
+    return res
+      .status(404)
+      .json({ error: `Book with id ${id} does not exist 🚫` });
   }
 
   books.splice(indexToDelete, 1);
